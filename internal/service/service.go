@@ -13,3 +13,14 @@ type Todo interface {
 
 	GetWithTX(tx *sql.Tx) Todo
 }
+
+// Storage is the interface that defines the methods that the Storage service must implement
+type Storage interface {
+	Upload(ctx context.Context, file []byte, fileName string) (string, error)
+	Download(ctx context.Context, fileID string) ([]byte, error)
+}
+
+// Queue is the interface that defines the methods that the Queue service must implement
+type Queue interface {
+	PushTodoItem(ctx context.Context, message service_models.TodoItem) error
+}

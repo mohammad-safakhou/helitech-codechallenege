@@ -19,6 +19,6 @@ func NewQueueService(queueRepository repository.QueueRepository) Queue {
 }
 
 // PushTodoItem pushes a todo item to the queue
-func (s *queueService) PushTodoItem(ctx context.Context, message service_models.TodoItem) error {
-	panic("not implemented") // TODO: Implement
+func (s *queueService) pushTodoItem(ctx context.Context, message service_models.TodoItem) error {
+	return s.queueRepository.PushTodoItem(ctx, message)
 }

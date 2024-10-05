@@ -19,10 +19,10 @@ func NewStorageService(storageRepository repository.StorageRepository) Storage {
 
 // Upload uploads a file
 func (s *storageService) Upload(ctx context.Context, file []byte, fileName string) (string, error) {
-	panic("not implemented") // TODO: Implement
+	return s.storageRepository.Upload(ctx, file, fileName)
 }
 
 // Download downloads a file
 func (s *storageService) Download(ctx context.Context, fileID string) ([]byte, error) {
-	panic("not implemented") // TODO: Implement
+	return s.storageRepository.Download(ctx, fileID)
 }

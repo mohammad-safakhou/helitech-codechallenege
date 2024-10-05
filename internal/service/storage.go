@@ -1,14 +1,20 @@
 package service
 
-import "context"
+import (
+	"codechallenge/internal/repository"
+	"context"
+)
 
 // Storage is the interface that defines the methods that the Storage service must implement
 type storageService struct {
+	storageRepository repository.StorageRepository
 }
 
 // NewStorageService creates a new Storage service
-func NewStorageService() Storage {
-	return &storageService{}
+func NewStorageService(storageRepository repository.StorageRepository) Storage {
+	return &storageService{
+		storageRepository: storageRepository,
+	}
 }
 
 // Upload uploads a file

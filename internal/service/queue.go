@@ -1,17 +1,21 @@
 package service
 
 import (
+	"codechallenge/internal/repository"
 	"codechallenge/internal/service/service_models"
 	"context"
 )
 
 // queueService is the struct that implements the Queue interface
 type queueService struct {
+	queueRepository repository.QueueRepository
 }
 
 // NewQueueService creates a new Queue service
-func NewQueueService() Queue {
-	return &queueService{}
+func NewQueueService(queueRepository repository.QueueRepository) Queue {
+	return &queueService{
+		queueRepository: queueRepository,
+	}
 }
 
 // PushTodoItem pushes a todo item to the queue

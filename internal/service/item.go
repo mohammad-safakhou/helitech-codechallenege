@@ -1,18 +1,30 @@
 package service
 
 import (
+	"codechallenge/internal/repository"
 	"codechallenge/internal/service/service_models"
 	"context"
 	"database/sql"
 )
 
 type todoService struct {
+	queueService   Queue
+	todoRepository repository.QueueRepository
+
 	tx *sql.DB
 }
 
 // NewTodoService creates a new Todo service
-func NewTodoService() Todo {
-	return &todoService{}
+func NewTodoService(
+	queueService Queue,
+	todoRepository repository.QueueRepository,
+	tx *sql.DB,
+) Todo {
+	return &todoService{
+		queueService:   queueService,
+		todoRepository: todoRepository,
+		tx:             tx,
+	}
 }
 
 // Create creates a new todo item

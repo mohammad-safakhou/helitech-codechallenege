@@ -4,11 +4,12 @@ import (
 	"codechallenge/internal/service/service_models"
 	"context"
 	"database/sql"
+	"io"
 )
 
 type StorageRepository interface {
-	Upload(ctx context.Context, file []byte, filename string) (string, error)
-	Download(ctx context.Context, filename string) ([]byte, error)
+	Upload(ctx context.Context, file io.ReadCloser, filename string) (string, error)
+	Download(ctx context.Context, filename string) (io.ReadCloser, error)
 }
 
 type QueueRepository interface {

@@ -4,6 +4,7 @@ import (
 	"codechallenge/internal/service/service_models"
 	"context"
 	"database/sql"
+	"io"
 )
 
 // Todo is the interface that defines the methods that the Todo service must implement
@@ -17,8 +18,8 @@ type Todo interface {
 
 // Storage is the interface that defines the methods that the Storage service must implement
 type Storage interface {
-	Upload(ctx context.Context, file []byte, fileName string) (string, error)
-	Download(ctx context.Context, fileID string) ([]byte, error)
+	Upload(ctx context.Context, file io.ReadCloser, fileName string) (string, error)
+	Download(ctx context.Context, fileID string) (io.ReadCloser, error)
 }
 
 // Queue is the interface that defines the methods that the Queue service must implement

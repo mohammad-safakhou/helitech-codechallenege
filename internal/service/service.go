@@ -2,24 +2,21 @@ package service
 
 import (
 	"codechallenge/internal/service/service_models"
+	"codechallenge/utils"
 	"context"
-	"database/sql"
 	"io"
 )
 
 // Todo is the interface that defines the methods that the Todo service must implement
 type Todo interface {
 	CreateAndPushTX(ctx context.Context, todoItem service_models.TodoItem) (service_models.TodoItem, error)
-	create(ctx context.Context, todoItem service_models.TodoItem) (service_models.TodoItem, error)
+	create(ctx context.Context, todoItem service_models.TodoItem) (utils.DbTransaction, service_models.TodoItem, error)
 	get(ctx context.Context, id string) (service_models.TodoItem, error)
-
-	getWithTX(tx *sql.Tx) Todo
 }
 
 // Storage is the interface that defines the methods that the Storage service must implement
 type Storage interface {
 	Upload(ctx context.Context, file io.ReadCloser, fileName string) (string, error)
-	Download(ctx context.Context, fileID string) (io.ReadCloser, error)
 }
 
 // Queue is the interface that defines the methods that the Queue service must implement

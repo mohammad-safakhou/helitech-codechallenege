@@ -2,6 +2,7 @@ package repository
 
 import (
 	"codechallenge/internal/service/service_models"
+	"codechallenge/utils"
 	"context"
 	"database/sql"
 	"io"
@@ -9,7 +10,6 @@ import (
 
 type StorageRepository interface {
 	Upload(ctx context.Context, file io.ReadCloser, filename string) (string, error)
-	Download(ctx context.Context, filename string) (io.ReadCloser, error)
 }
 
 type QueueRepository interface {
@@ -17,7 +17,7 @@ type QueueRepository interface {
 }
 
 type TodoRepository interface {
-	Create(ctx context.Context, todoItem service_models.TodoItem) (service_models.TodoItem, error)
+	CreateWithTX(ctx context.Context, todoItem service_models.TodoItem) (dbFunc utils.DbTransaction, item service_models.TodoItem, err error)
 	Get(ctx context.Context, id string) (service_models.TodoItem, error)
 
 	GetWithTX(tx *sql.Tx) TodoRepository

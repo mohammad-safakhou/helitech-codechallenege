@@ -10,11 +10,9 @@
 package mocks
 
 import (
-	repository "codechallenge/internal/repository"
 	service_models "codechallenge/internal/service/service_models"
 	utils "codechallenge/utils"
 	context "context"
-	sql "database/sql"
 	io "io"
 	reflect "reflect"
 
@@ -148,18 +146,4 @@ func (m *MockTodoRepository) Get(ctx context.Context, id string) (service_models
 func (mr *MockTodoRepositoryMockRecorder) Get(ctx, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Get", reflect.TypeOf((*MockTodoRepository)(nil).Get), ctx, id)
-}
-
-// GetWithTX mocks base method.
-func (m *MockTodoRepository) GetWithTX(tx *sql.Tx) repository.TodoRepository {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetWithTX", tx)
-	ret0, _ := ret[0].(repository.TodoRepository)
-	return ret0
-}
-
-// GetWithTX indicates an expected call of GetWithTX.
-func (mr *MockTodoRepositoryMockRecorder) GetWithTX(tx any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWithTX", reflect.TypeOf((*MockTodoRepository)(nil).GetWithTX), tx)
 }

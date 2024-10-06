@@ -4,7 +4,6 @@ import (
 	"codechallenge/internal/service/service_models"
 	"codechallenge/utils"
 	"context"
-	"database/sql"
 	"io"
 )
 
@@ -19,6 +18,4 @@ type QueueRepository interface {
 type TodoRepository interface {
 	CreateWithTX(ctx context.Context, todoItem service_models.TodoItem) (dbFunc utils.DbTransaction, item service_models.TodoItem, err error)
 	Get(ctx context.Context, id string) (service_models.TodoItem, error)
-
-	GetWithTX(tx *sql.Tx) TodoRepository
 }

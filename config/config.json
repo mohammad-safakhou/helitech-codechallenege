@@ -1,0 +1,19 @@
+{
+  "general": {
+    "log_level": 0
+  },
+  "databases": {
+    "postgres": {
+      "migration_path": "db/migrations",
+      "host": "db",
+      "port": "5432",
+      "user": "root",
+      "pass": "root",
+      "database_name": "code_challenge",
+      "ssl_mode": "disable",
+      "max_open_conns": 10,
+      "max_idle_conns": 20,
+      "timeout": "30s"
+    }
+  }
+}

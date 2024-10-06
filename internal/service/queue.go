@@ -18,7 +18,7 @@ func NewQueueService(queueRepository repository.QueueRepository) Queue {
 	}
 }
 
-// PushTodoItem pushes a todo item to the queue
+// PushTodoItem pushes a database item to the queue
 func (s *queueService) pushTodoItem(ctx context.Context, message service_models.TodoItem) error {
 	return s.queueRepository.PushTodoItem(ctx, message)
 }

@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// TodoItem represents a todo item
+// TodoItem represents a database item
 type TodoItem struct {
 	ID          uuid.UUID `json:"id"`
 	Description string    `json:"description"`

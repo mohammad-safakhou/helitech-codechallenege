@@ -24,7 +24,7 @@ func NewTodoService(
 	}
 }
 
-// CreateAndPushTX creates a new todo item and pushes it to the queue
+// CreateAndPushTX creates a new database item and pushes it to the queue
 func (s *todoService) CreateAndPushTX(ctx context.Context, todoItem service_models.TodoItem) (service_models.TodoItem, error) {
 	dbFunc, todoItem, err := s.create(ctx, todoItem)
 	if err != nil {
@@ -49,12 +49,12 @@ func (s *todoService) CreateAndPushTX(ctx context.Context, todoItem service_mode
 	return todoItem, nil
 }
 
-// Create creates a new todo item
+// Create creates a new database item
 func (s *todoService) create(ctx context.Context, todoItem service_models.TodoItem) (utils.DbTransaction, service_models.TodoItem, error) {
 	return s.todoRepository.CreateWithTX(ctx, todoItem)
 }
 
-// Get gets a todo item by its ID
+// Get gets a database item by its ID
 func (s *todoService) get(ctx context.Context, id string) (service_models.TodoItem, error) {
 	return s.todoRepository.Get(ctx, id)
 }

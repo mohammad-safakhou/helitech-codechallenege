@@ -4,12 +4,31 @@ import (
 	"fmt"
 	"github.com/spf13/viper"
 	"strings"
+	"time"
 )
 
 var AppConfig *config // global app config
 
 type config struct {
-	General General `mapstructure:"general"` // general configs
+	General   General   `mapstructure:"general"`   // general config
+	Databases Databases `mapstructure:"databases"` // databases config
+}
+
+type Databases struct {
+	Postgres Postgres `mapstructure:"postgres"` // postgres config
+}
+
+type Postgres struct {
+	Host          string        `mapstructure:"host"`           // postgres host
+	Port          string        `mapstructure:"port"`           // postgres port
+	User          string        `mapstructure:"user"`           // postgres user
+	Pass          string        `mapstructure:"pass"`           // postgres pass
+	DatabaseName  string        `mapstructure:"database_name"`  // postgres database
+	SslMode       string        `mapstructure:"ssl_mode"`       // postgres ssl mode
+	MaxOpenConns  int           `mapstructure:"max_open_conns"` // postgres max open connections
+	MaxIdleConns  int           `mapstructure:"max_idle_conns"` // postgres max idle connections
+	Timeout       time.Duration `mapstructure:"timeout"`        // postgres timeout
+	MigrationPath string        `mapstructure:"migration_path"` // migration path
 }
 
 type General struct {

@@ -7,7 +7,7 @@ import (
 
 var Logger *zap.SugaredLogger
 
-// LoadLogger loads logger configs
+// LoadLogger loads logger config
 func LoadLogger(logLevel int8) {
 	cfg := zap.Config{
 		Level:       zap.NewAtomicLevelAt(zapcore.Level(logLevel)),

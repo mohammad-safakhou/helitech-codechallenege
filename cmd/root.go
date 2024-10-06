@@ -1,11 +1,12 @@
 package cmd
 
 import (
+	"embed"
 	"fmt"
 	"os"
 	"time"
 
-	"codechallenge/configs"
+	"codechallenge/config"
 	"codechallenge/logger"
 	"github.com/spf13/cobra"
 )
@@ -20,7 +21,8 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 }
 
-func Execute() {
+func Execute(mf embed.FS) {
+	migrationFS = mf
 	err := os.Setenv("TZ", time.UTC.String())
 	if err != nil {
 		panic(err)
@@ -38,6 +40,7 @@ func init() {
 		initConfig,
 		initLogger, // logger should come after config
 	)
+	rootCmd.AddCommand(migrateCommand)
 }
 
 func initConfig() {

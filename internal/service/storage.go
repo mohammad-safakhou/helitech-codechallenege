@@ -25,15 +25,15 @@ func NewStorageService(storageRepository repository.StorageRepository, maxUpload
 }
 
 // Upload uploads a file
-func (s *storageService) Upload(ctx context.Context, file io.ReadCloser, fileName string) (string, error) {
+func (s *storageService) Upload(ctx context.Context, file io.ReadCloser, fileName string) error {
 	err := s.validateFileName(fileName)
 	if err != nil {
-		return "", err
+		return err
 	}
 
 	err = s.validateFile(file)
 	if err != nil {
-		return "", err
+		return err
 	}
 
 	return s.storageRepository.Upload(ctx, file, fileName)

@@ -8,7 +8,7 @@ import (
 )
 
 type StorageRepository interface {
-	Upload(ctx context.Context, file io.ReadCloser, filename string) (string, error)
+	Upload(ctx context.Context, file io.ReadCloser, filename string) error
 }
 
 type QueueRepository interface {

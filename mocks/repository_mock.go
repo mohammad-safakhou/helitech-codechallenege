@@ -43,12 +43,11 @@ func (m *MockStorageRepository) EXPECT() *MockStorageRepositoryMockRecorder {
 }
 
 // Upload mocks base method.
-func (m *MockStorageRepository) Upload(ctx context.Context, file io.ReadCloser, filename string) (string, error) {
+func (m *MockStorageRepository) Upload(ctx context.Context, file io.ReadCloser, filename string) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Upload", ctx, file, filename)
-	ret0, _ := ret[0].(string)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret0, _ := ret[0].(error)
+	return ret0
 }
 
 // Upload indicates an expected call of Upload.

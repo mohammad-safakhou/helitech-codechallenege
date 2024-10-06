@@ -10,8 +10,9 @@ import (
 var AppConfig *config // global app config
 
 type config struct {
-	General   General   `mapstructure:"general"`   // general config
-	Databases Databases `mapstructure:"databases"` // databases config
+	General   General     `mapstructure:"general"`   // general config
+	Databases Databases   `mapstructure:"databases"` // databases config
+	Storage   AwsS3Config `mapstructure:"s3_config"` // storage configs
 }
 
 type Databases struct {
@@ -29,6 +30,13 @@ type Postgres struct {
 	MaxIdleConns  int           `mapstructure:"max_idle_conns"` // postgres max idle connections
 	Timeout       time.Duration `mapstructure:"timeout"`        // postgres timeout
 	MigrationPath string        `mapstructure:"migration_path"` // migration path
+}
+
+type AwsS3Config struct {
+	Endpoint  string `mapstructure:"endpoint"`
+	Bucket    string `mapstructure:"bucket"`
+	AccessKey string `mapstructure:"access_key"`
+	SecretKey string `mapstructure:"secret_key"`
 }
 
 type General struct {

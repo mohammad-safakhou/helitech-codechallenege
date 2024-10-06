@@ -15,5 +15,11 @@
       "max_idle_conns": 20,
       "timeout": "30s"
     }
+  },
+  "s3_config": {
+    "endpoint": "https://localhost:9000",
+    "bucket": "code_challenge",
+    "access_key": "",
+    "secret_key": ""
   }
 }

@@ -16,7 +16,7 @@ type Todo interface {
 
 // Storage is the interface that defines the methods that the Storage service must implement
 type Storage interface {
-	Upload(ctx context.Context, file io.ReadCloser, fileName string) (string, error)
+	Upload(ctx context.Context, file io.ReadCloser, fileName string) error
 }
 
 // Queue is the interface that defines the methods that the Queue service must implement

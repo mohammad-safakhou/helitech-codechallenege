@@ -6,6 +6,7 @@ import (
 	"codechallenge/logger"
 	"codechallenge/utils"
 	"context"
+	"github.com/google/uuid"
 )
 
 type todoService struct {
@@ -26,6 +27,7 @@ func NewTodoService(
 
 // CreateAndPushTX creates a new database item and pushes it to the queue
 func (s *todoService) CreateAndPushTX(ctx context.Context, todoItem service_models.TodoItem) (service_models.TodoItem, error) {
+	todoItem.ID = uuid.New().String()
 	dbFunc, todoItem, err := s.create(ctx, todoItem)
 	if err != nil {
 		return service_models.TodoItem{}, err

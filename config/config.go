@@ -10,9 +10,16 @@ import (
 var AppConfig *config // global app config
 
 type config struct {
-	General   General     `mapstructure:"general"`   // general config
-	Databases Databases   `mapstructure:"databases"` // databases config
-	Storage   AwsS3Config `mapstructure:"s3_config"` // storage configs
+	Opt       Opt          `mapstructure:"opt"`        // opt config
+	General   General      `mapstructure:"general"`    // general config
+	Databases Databases    `mapstructure:"databases"`  // databases config
+	Storage   AwsS3Config  `mapstructure:"s3_config"`  // storage configs
+	Queue     AwsSqsConfig `mapstructure:"sqs_config"` // queue configs
+}
+
+type Opt struct {
+	MaxUploadSize       int64    `mapstructure:"max_upload_size"`
+	ValidFileExtensions []string `mapstructure:"valid_file_extensions"`
 }
 
 type Databases struct {
@@ -39,8 +46,19 @@ type AwsS3Config struct {
 	SecretKey string `mapstructure:"secret_key"`
 }
 
+type AwsSqsConfig struct {
+	Address      string `mapstructure:"address"`
+	QueueAddress string `mapstructure:"queue_address"`
+	AccessKey    string `mapstructure:"access_key"`
+	SecretKey    string `mapstructure:"secret_key"`
+}
+
 type General struct {
-	LogLevel int8 `mapstructure:"log_level"` // logger level
+	LogLevel        int8          `mapstructure:"log_level"`        // logger level
+	Listen          string        `mapstructure:"listen"`           // rest listen port
+	ShutdownTimeout time.Duration `mapstructure:"shutdown_timeout"` // shutdown timeout
+	AppName         string        `mapstructure:"app_name"`         // application name
+	Host            string        `mapstructure:"host"`             // rest host
 }
 
 // LoadConfig loads config from file

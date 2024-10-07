@@ -1,5 +1,42 @@
 {
+  "opt": {
+    "max_upload_size": 1e+7,
+    "valid_file_extensions": [
+      "png",
+      "txt"
+    ]
+  },
   "general": {
-    "log_level": 0
+    "log_level": 0,
+    "listen": "4000",
+    "shutdown_timeout": "5s",
+    "app_name": "code_challenge",
+    "host": ""
+  },
+  "databases": {
+    "postgres": {
+      "migration_path": "db/migrations",
+      "host": "localhost",
+      "port": "5432",
+      "user": "root",
+      "pass": "root",
+      "database_name": "code_challenge",
+      "ssl_mode": "disable",
+      "max_open_conns": 10,
+      "max_idle_conns": 20,
+      "timeout": "30s"
+    }
+  },
+  "s3_config": {
+    "endpoint": "http://localhost:4566",
+    "bucket": "codechallenge",
+    "access_key": "",
+    "secret_key": ""
+  },
+  "sqs_config": {
+    "address": "http://localhost:4566",
+    "queue_address": "my-queue",
+    "access_key": "",
+    "secret_key": ""
   }
 }

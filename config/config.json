@@ -16,7 +16,7 @@
   "databases": {
     "postgres": {
       "migration_path": "db/migrations",
-      "host": "localhost",
+      "host": "db",
       "port": "5432",
       "user": "root",
       "pass": "root",
@@ -28,13 +28,13 @@
     }
   },
   "s3_config": {
-    "endpoint": "http://localhost:4566",
+    "endpoint": "http://localstack:4566",
     "bucket": "codechallenge",
     "access_key": "",
     "secret_key": ""
   },
   "sqs_config": {
-    "address": "http://localhost:4566",
+    "address": "http://localstack:4566",
     "queue_address": "my-queue",
     "access_key": "",
     "secret_key": ""

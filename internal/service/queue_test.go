@@ -4,7 +4,6 @@ import (
 	"codechallenge/internal/service/service_models"
 	"codechallenge/mocks"
 	"context"
-	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 	"testing"
@@ -20,7 +19,7 @@ func Test_PushTodoItem(t *testing.T) {
 
 	ctx := context.Background()
 	mockItem := service_models.TodoItem{
-		ID:          uuid.UUID{},
+		ID:          "",
 		Description: "",
 		DueDate:     time.Time{},
 		FileID:      "",

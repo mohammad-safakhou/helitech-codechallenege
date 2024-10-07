@@ -24,13 +24,7 @@ func Test_CreateAndPushTX(t *testing.T) {
 		ctx := context.Background()
 		var mockItem = service_models.TodoItem{}
 		mockQueue.EXPECT().PushTodoItem(ctx, gomock.Any()).Return(nil)
-
-		todoResultItem := service_models.TodoItem{
-			ID:          uuid.New(),
-			Description: "test",
-			FileID:      "test",
-		}
-		mockTodoRepo.EXPECT().CreateWithTX(ctx, mockItem).Return(mockDbTransaction, todoResultItem, nil)
+		mockTodoRepo.EXPECT().CreateWithTX(ctx, gomock.Any()).Return(mockDbTransaction, mockItem, nil)
 
 		mockDbTransaction.EXPECT().Commit().Return(nil)
 
@@ -56,7 +50,7 @@ func Test_CreateAndPushTX(t *testing.T) {
 		ctx := context.Background()
 		var mockItem = service_models.TodoItem{}
 		mockQueue.EXPECT().PushTodoItem(ctx, mockItem).Return(errors.New("error"))
-		mockTodoRepo.EXPECT().CreateWithTX(ctx, mockItem).Return(mockDbTransaction, mockItem, nil)
+		mockTodoRepo.EXPECT().CreateWithTX(ctx, gomock.Any()).Return(mockDbTransaction, mockItem, nil)
 
 		queueServiceTest := NewQueueService(mockQueue)
 		todoServiceTest := NewTodoService(queueServiceTest, mockTodoRepo)
@@ -64,6 +58,6 @@ func Test_CreateAndPushTX(t *testing.T) {
 		resultItem, err := todoServiceTest.CreateAndPushTX(ctx, mockItem)
 		assert.NotNil(t, err)
 
-		assert.Equal(t, resultItem.ID, uuid.UUID{})
+		assert.NotEqual(t, resultItem.ID, uuid.UUID{})
 	})
 }
